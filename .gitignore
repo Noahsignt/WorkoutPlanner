@@ -35,3 +35,6 @@ jest-puppeteer.config.js
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# firebase
+/.firebase
