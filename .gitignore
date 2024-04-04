@@ -1,0 +1,37 @@
+# Node.js
+node_modules/
+
+# Compiled output
+.next/
+out/
+
+# Logs and debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+pnp-lock.yaml
+.pnp.*
+.cache/
+.cache-loader/
+.cypress/
+jest-puppeteer.config.js
+
+# Next.js
+/.next
+/.vercel
+/vercel.json
+
+# IDE
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
