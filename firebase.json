@@ -10,13 +10,23 @@
       "region": "asia-east1"
     }
   },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "emulators": {
+    "auth": {
+      "port": 9099
+    },
     "hosting": {
-      "port": 5781
+      "port": 5853
     },
     "ui": {
       "enabled": true
     },
-    "singleProjectMode": true
+    "singleProjectMode": true,
+    "firestore": {
+      "port": 8080
+    }
   }
 }
