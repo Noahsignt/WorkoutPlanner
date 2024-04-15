@@ -1,5 +1,5 @@
 import { auth } from "../app";
-import { onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 // used to track functions to be called when user changes
 const callbacks = []
