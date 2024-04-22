@@ -1,0 +1,10 @@
+body {
+    --primary-colour: #33AECC;
+    --secondary-colour: #33CC9D;
+    --tertiary-colour: #33CC51;
+    --background-colour: #ffffff;
+}
+
+h1 {
+    margin: 0;
+}
