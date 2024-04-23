@@ -1,5 +1,5 @@
 import { auth } from "../app";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const signup = (email, password) => {
     try {
@@ -17,4 +17,12 @@ const login = (email, password) => {
     }
 }
 
-export { signup, login }
+const logout = () => {
+    signOut(auth).then(() => {
+        console.log('user signed out');
+      }).catch((error) => {
+        console.log(e);
+      });      
+}
+
+export { signup, login, logout }

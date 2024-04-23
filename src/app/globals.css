@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     --primary-colour: #33AECC;
     --secondary-colour: #33CC9D;
     --tertiary-colour: #33CC51;
