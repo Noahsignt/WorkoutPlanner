@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-colour);
+    padding: 16px;
+}
+
+.header button{
+    width: 90px;
+    height: 32px;
+    border-radius: 8px;
+    border: transparent;
+    background-color: var(--secondary-colour);
+    font-weight: bold;
+}
