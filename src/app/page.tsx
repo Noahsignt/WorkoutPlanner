@@ -21,7 +21,7 @@ export default function Home() {
     <main>  
       <UserContext.Provider value={user}>
         <Header />
-        {user ? 'logged in' : <UserForm />}
+        {user ? <></> : <UserForm />}
       </UserContext.Provider>
     </main>
   );

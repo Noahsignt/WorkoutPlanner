@@ -3,7 +3,7 @@ import { signup, login } from "@/firebase/auth/login"
 
 import { FormEvent, useState } from "react";
 
-export default function UserForm() {
+export default function UserForm({ miniDisplay=false, closePopup= () => {} }) {
     const [isLogin, setLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,8 +20,8 @@ export default function UserForm() {
 
     return (
         isLogin ? 
-        <div className={styles['user-form']}>
-            <h1>Login</h1>
+        <div className={`${styles['user-form']} ${miniDisplay ? styles['user-form-mini'] : ''}`}>
+            {!miniDisplay ? <h1>Login</h1> : <div className={styles['user-form-close']} onClick={closePopup}>x</div>}
             <form onSubmit={submitLogin}>
                 <div className={styles['user-form-bloc']}>
                     <label htmlFor="email">Email:</label>
@@ -46,8 +46,8 @@ export default function UserForm() {
             <button className={styles['user-form-swapper']} onClick={() => setLogin(false)}>Register</button>
         </div>
         :
-        <div className={styles['user-form']}>
-            <h1>Register</h1>
+        <div className={`${styles['user-form']} ${miniDisplay ? styles['user-form-mini'] : ''}`}>
+            {!miniDisplay ? <h1>Login</h1> : <div className={styles['user-form-close']} onClick={closePopup}>x</div>}
             <form onSubmit={submitSignUp}>
                 <div className={styles['user-form-bloc']}>
                     <label htmlFor="email">Email:</label>
