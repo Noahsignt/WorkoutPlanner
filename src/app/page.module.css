@@ -1,0 +1,10 @@
+.home-main {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin: 48px auto;
+    max-width: 600px;
+    padding: 12px 48px;
+    border-radius: 16px;
+}

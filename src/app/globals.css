@@ -1,9 +1,16 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
+    height: 100%;
     --primary-colour: #33AECC;
     --secondary-colour: #33CC9D;
     --tertiary-colour: #33CC51;
     --background-colour: #ffffff;
+    --light-gray: #878787;
+    background-image: linear-gradient(to bottom right, var(--primary-colour), var(--tertiary-colour));
 }
 
 h1 {

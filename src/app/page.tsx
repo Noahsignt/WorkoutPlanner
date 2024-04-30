@@ -4,6 +4,7 @@ import { UserContext } from "./context";
 
 import UserForm from "./components/UserForm";
 import Header from "./components/Header";
+import InfoBloc from "./components/InfoBloc";
 
 import { auth } from "@/firebase/app";
 import { getDay } from "../firebase/firestore/crud"
@@ -21,7 +22,14 @@ export default function Home() {
     <main>  
       <UserContext.Provider value={user}>
         <Header />
-        {user ? <></> : <UserForm />}
+        {user ? 
+        <></>
+        : 
+        <div className={styles['home-main']}>
+          <InfoBloc title="test" text="test" flavour="test" src="/home_info/placeholder.jpeg"/>
+          <UserForm />
+        </div> 
+        }
       </UserContext.Provider>
     </main>
   );

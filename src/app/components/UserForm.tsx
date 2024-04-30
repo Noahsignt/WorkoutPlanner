@@ -47,7 +47,7 @@ export default function UserForm({ miniDisplay=false, closePopup= () => {} }) {
         </div>
         :
         <div className={`${styles['user-form']} ${miniDisplay ? styles['user-form-mini'] : ''}`}>
-            {!miniDisplay ? <h1>Login</h1> : <div className={styles['user-form-close']} onClick={closePopup}>x</div>}
+            {!miniDisplay ? <h1>Sign Up</h1> : <div className={styles['user-form-close']} onClick={closePopup}>x</div>}
             <form onSubmit={submitSignUp}>
                 <div className={styles['user-form-bloc']}>
                     <label htmlFor="email">Email:</label>

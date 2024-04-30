@@ -3,7 +3,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-colour);
+    background-color: var(--background-colour);
+    color: var(--primary-colour);
     padding: 16px;
 }
 
