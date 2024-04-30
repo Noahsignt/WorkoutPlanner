@@ -1,4 +1,11 @@
-.home-main {
+.home-main-user {
+    margin: 48px 128px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+}
+
+.home-main-anon {
     background-color: white;
     display: flex;
     flex-direction: column;

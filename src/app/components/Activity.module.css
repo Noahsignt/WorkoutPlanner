@@ -1,0 +1,27 @@
+.activity {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activity-date {
+    color: var(--light-gray);
+}
+
+.activity-type {
+    text-transform: capitalize;
+    color: var(--secondary-colour);
+}
+
+.activity-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    gap: 8px;
+}
+
+.activity-timer {
+    height: 24px;
+}

@@ -1,5 +1,6 @@
-export interface Activity {
+export interface ActivityInterface {
     description: string,
     duration: number,
-    type: string
+    type: string,
+    date: string
 }
