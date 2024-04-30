@@ -3,7 +3,7 @@ import { getFirestore, doc, setDoc, collection, query, getDocs } from "firebase/
 
 export async function getDay(user, date){
     //test if date is valid
-    if(!/^\d{2}-\d{2}-\d{4}$/.test(date)){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){
         return null;
     }
 
