@@ -1,0 +1,15 @@
+.info-bloc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.info-bloc img {
+    border-radius: 8px;
+}
+
+.info-bloc-flavour {
+    color: var(--secondary-colour);
+    margin-bottom: 4px;
+}
