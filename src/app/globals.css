@@ -5,12 +5,12 @@ html {
 body {
     margin: 0;
     height: 100%;
-    --primary-colour: #33AECC;
-    --secondary-colour: #33CC9D;
+    --primary-colour: #20368F;
+    --secondary-colour: #33AECC;
     --tertiary-colour: #33CC51;
     --background-colour: #ffffff;
     --light-gray: #878787;
-    background-image: linear-gradient(to bottom right, var(--primary-colour), var(--tertiary-colour));
+    --contrast: #CC5133;
 }
 
 h1 {

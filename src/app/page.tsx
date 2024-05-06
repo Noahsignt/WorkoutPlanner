@@ -7,6 +7,7 @@ import UserForm from "./components/UserForm";
 import Header from "./components/Header";
 import InfoBloc from "./components/InfoBloc";
 import Activity from "./components/Activity";
+import AddActivityBtn from "./components/AddActivityBtn";
 
 import { auth } from "@/firebase/app";
 import { getDay } from "../firebase/firestore/crud"
@@ -50,6 +51,7 @@ export default function Home() {
         {user ? 
         <div className={styles['home-main-user']}>
           {renderActivities()}
+          <AddActivityBtn />
         </div>
         : 
         <div className={styles['home-main-anon']}>

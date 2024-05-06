@@ -3,9 +3,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--background-colour);
-    color: var(--primary-colour);
+    color: white;
     padding: 16px;
+    background-image: linear-gradient(to right, var(--secondary-colour), var(--tertiary-colour));
 }
 
 .header-button{
@@ -15,4 +15,5 @@
     border: transparent;
     background-color: var(--secondary-colour);
     font-weight: bold;
+    color: white;
 }
