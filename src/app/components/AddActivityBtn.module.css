@@ -1,0 +1,49 @@
+.add-activity-btn {
+    width: 25%;
+    height: 25%;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    color: white;
+    background-color: var(--secondary-colour);
+    font-size: 36px;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+}
+
+.add-activity-popup {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    gap: 4px;
+    width: 200px;
+}
+
+.add-activity-popup input {
+    border: none;
+    border-bottom: 1px solid var(--light-gray);
+    height: 24px;
+    color: #878787;
+}
+
+.add-activity-popup label {
+    font-size: 14px;
+    color: #878787;
+}
+
+.add-activity-btns-cont {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-activity-btns-cont button {
+    width: 40%;
+    background-color: var(--secondary-colour);
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
