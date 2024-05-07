@@ -1,5 +1,7 @@
 import { db } from "../app";
-import { getFirestore, doc, setDoc, collection, query, getDocs } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, query, getDocs, updateDoc } from "firebase/firestore";
+
+import { ActivityInterface } from "@/app/interfaces";
 
 export async function getDay(user, date){
     //test if date is valid
@@ -32,17 +34,49 @@ export async function getDay(user, date){
     }
 }
 
-async function addData(collection, id, data) {
-    let result = null;
-    let error = null;
-
+export async function addData(activityObj, user) {
     try {
-        result = await setDoc(doc(db, collection, id), data, {
-            merge: true,
-        });
-    } catch (e) {
-        error = e;
-    }
+        const usersRef = collection(db, 'users')
+        const q = query(usersRef);
+        const res = await getDocs(q);
 
-    return { result, error };
+        //either empty obj or contains all the events already defined for that day
+        let currentDayData = {};
+        let currentDaysData = [];
+        const setDate = activityObj.date;
+
+        if(!res.empty){
+            for (const doc of res.docs) {
+                const obj = doc.data()
+                
+                if(obj?.email === user){
+                    currentDaysData = obj.days ? obj.days : [];
+                    currentDayData = obj.days[setDate] ? obj.days[setDate] : {};
+                }
+            }
+        }
+
+        const updatedDayData = [
+            ...(Object.keys(currentDayData).length > 0 ? currentDayData : []),
+          {
+            type: activityObj.type,
+            duration: activityObj.duration,
+            description: activityObj.description
+          }
+        ];
+
+        const updatedDaysData = {
+            ...currentDaysData,
+            [setDate]: updatedDayData
+        }
+
+        //collection users, document <user>, map days. Days.put(date, updatedDayData)
+        const userRef = doc(db, "users", user);
+     
+        await updateDoc(userRef, {
+            days: updatedDaysData
+        })
+      } catch (error) {
+        console.error('Error adding data:', error);
+      }
 }

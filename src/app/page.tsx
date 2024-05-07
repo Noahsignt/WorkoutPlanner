@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { UserContext } from "./context";
-import { ActivityInterface } from "./interfaces";
+import { ActivityInterface, UserInterface } from "./interfaces";
 
 import UserForm from "./components/UserForm";
 import Header from "./components/Header";
@@ -18,13 +18,13 @@ import { render } from "react-dom";
 
 export default function Home() {  
   const currentDate = new Date();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserInterface | null>(null);
   const [activities, setActivities] = useState<ActivityInterface[]>([]);
   //slice is always just the year, month and day in iso string format
   const [slice, setSlice] = useState([currentDate.toISOString().slice(0, 10), currentDate.toISOString().slice(0, 10)])
 
   useEffect(() => {
-    onUserChange((e : any) => {
+    onUserChange((e : UserInterface) => {
       setUser(e);
 
       getDay(e?.email, slice[0]).then(data => {
