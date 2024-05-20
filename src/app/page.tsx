@@ -22,6 +22,12 @@ export default function Home() {
   const [activities, setActivities] = useState<ActivityInterface[]>([]);
   //slice is always just the year, month and day in iso string format
   const [slice, setSlice] = useState([currentDate.toISOString().slice(0, 10), currentDate.toISOString().slice(0, 10)])
+  //need to rerender when AddActivityBtn popup status changes
+  const [createPopup, setCreatePopup] = useState(false);
+
+  const setPopup = (newVal: boolean) => {
+    setCreatePopup(newVal);
+  }
 
   useEffect(() => {
     onUserChange((e : UserInterface) => {
@@ -35,6 +41,15 @@ export default function Home() {
       })
     });
   }, [])
+
+  useEffect(() => {
+    getDay(user?.email, slice[0]).then(data => {
+      //add date to activities
+      setActivities(data.map((e : any) => ({...e, date: slice[0]})));
+    }).catch((error) => {
+      console.log(error);
+    })
+  }, [createPopup])
 
   const renderActivities = () => {
     return(
@@ -51,7 +66,7 @@ export default function Home() {
         {user ? 
         <div className={styles['home-main-user']}>
           {renderActivities()}
-          <AddActivityBtn />
+          <AddActivityBtn popup={createPopup} setPopup={setPopup}/>
         </div>
         : 
         <div className={styles['home-main-anon']}>

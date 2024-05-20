@@ -28,7 +28,9 @@ function AddActivityPopup(props: AddActivityPopupInterface) {
         });
         
         const submitObj = formVals as ActivityInterface;
-        user && addData(submitObj, user.email);
+        user && addData(submitObj, user.email).then(() => {
+            props.onClickFunc()
+        });
     }
 
     return(
@@ -73,8 +75,14 @@ function AddActivityPopup(props: AddActivityPopupInterface) {
     )
 }
 
-export default function AddActivityBtn() {
-    const [popup, setPopup] = useState(false);
+interface AddActivityBtnInterface {
+    popup: boolean,
+    setPopup: (x : boolean) => void
+}
+
+export default function AddActivityBtn(props: AddActivityBtnInterface) {
+    const popup = props.popup;
+    const setPopup = props.setPopup;
 
     return(
         <>  

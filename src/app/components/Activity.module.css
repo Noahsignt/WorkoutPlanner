@@ -5,6 +5,8 @@
     align-items: center;
     border: var(--secondary-colour) solid 2px;
     border-radius: 8px;
+    width: 250px;
+    height: 225px;
 }
 
 .activity-date {
