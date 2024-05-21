@@ -2,6 +2,7 @@ import { db } from "../app";
 import { getFirestore, doc, setDoc, collection, query, getDocs, updateDoc } from "firebase/firestore";
 
 import { ActivityInterface } from "@/app/interfaces";
+import { act } from "react-dom/test-utils";
 
 export async function getDay(user, date){
     //test if date is valid
@@ -78,5 +79,45 @@ export async function addData(activityObj, user) {
         })
       } catch (error) {
         console.error('Error adding data:', error);
+      }
+}
+
+export async function deleteActivity(user, activityObj) {
+    try {
+        const usersRef = collection(db, 'users')
+        const q = query(usersRef);
+        const res = await getDocs(q);
+
+        //either empty obj or contains all the events already defined for that day
+        let currentDayData = [];
+        let currentDaysData = [];
+        const setDate = activityObj.date;
+
+        if(!res.empty){
+            for (const doc of res.docs) {
+                const obj = doc.data()
+                
+                if(obj?.email === user.email){
+                    currentDaysData = obj.days ? obj.days : {};
+                    currentDayData = obj.days[setDate] ? obj.days[setDate] : [];
+                }
+            }
+        }
+
+        const updatedDayData = currentDayData.filter((e) => e.duration !== activityObj.duration || e.type !== activityObj.type || e.description !== activityObj.description);
+
+        const updatedDaysData = {
+            ...currentDaysData,
+            [setDate]: updatedDayData
+        }
+
+        //collection users, document <user>, map days. Days.put(date, updatedDayData)
+        const userRef = doc(db, "users", user.email);
+
+        await updateDoc(userRef, {
+            days: updatedDaysData
+        })
+    } catch (error) {
+        console.error('Error deleting data:', error);
       }
 }

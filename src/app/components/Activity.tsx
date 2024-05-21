@@ -1,8 +1,14 @@
 import { ActivityInterface } from '../interfaces'
+import { deleteActivity } from '@/firebase/firestore/crud'
+import { UserContext } from '../context';
+
+import { useContext } from 'react';
 
 import styles from './Activity.module.css'
 
 export default function Activity(props: ActivityInterface) {
+  const user = useContext(UserContext);
+
     const TimerSVG = (props : any) => (
         <svg
           className={styles['activity-timer']}
@@ -25,6 +31,7 @@ export default function Activity(props: ActivityInterface) {
 
     return (
         <div className={styles['activity']}>
+            <button onClick={() => deleteActivity(user, props)}>x</button>
             <p className={styles['activity-date']}>{props.date}</p>
             <h1 className={styles['activity-type']}>{props.type}</h1>
             <div className={styles['activity-info']}>
