@@ -1,8 +1,6 @@
 import { db } from "../app";
 import { getFirestore, doc, setDoc, collection, query, getDocs, updateDoc } from "firebase/firestore";
-
-import { ActivityInterface } from "@/app/interfaces";
-import { act } from "react-dom/test-utils";
+import { activityEquals } from "@/library/util";
 
 export async function getDay(user, date){
     //test if date is valid
@@ -104,7 +102,7 @@ export async function deleteActivity(user, activityObj) {
             }
         }
 
-        const updatedDayData = currentDayData.filter((e) => e.duration !== activityObj.duration || e.type !== activityObj.type || e.description !== activityObj.description);
+        const updatedDayData = currentDayData.filter((e) => !activityEquals(e, activityObj));
 
         const updatedDaysData = {
             ...currentDaysData,

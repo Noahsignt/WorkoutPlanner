@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { UserContext } from "./context";
 import { ActivityInterface, UserInterface } from "./interfaces";
+import { activityEquals } from "@/library/util";
 
 import UserForm from "./components/UserForm";
 import Header from "./components/Header";
@@ -25,10 +26,6 @@ export default function Home() {
   //need to rerender when AddActivityBtn popup status changes
   const [createPopup, setCreatePopup] = useState(false);
 
-  const setPopup = (newVal: boolean) => {
-    setCreatePopup(newVal);
-  }
-
   useEffect(() => {
     onUserChange((e : UserInterface) => {
       setUser(e);
@@ -51,10 +48,18 @@ export default function Home() {
     })
   }, [createPopup])
 
+  const setPopup = (newVal: boolean) => {
+    setCreatePopup(newVal);
+  }
+
+  const deleteActivity = (activity: ActivityInterface) => {
+    setActivities(activities.filter(e => !(activityEquals(e, activity))));
+  }
+
   const renderActivities = () => {
     return(
       activities.map((e, idx) => {
-        return <Activity description={e.description} type={e.type} duration={e.duration} date={e.date} key={idx} />
+        return <Activity description={e.description} type={e.type} duration={e.duration} date={e.date} key={idx} deleteSelf={deleteActivity}/>
       })
     )
   }
