@@ -1,12 +1,17 @@
 import { db } from "../app";
 import { getFirestore, doc, setDoc, collection, query, getDocs, updateDoc } from "firebase/firestore";
-import { activityEquals } from "@/library/util";
+import { activityEquals, getDateRange } from "@/library/util";
 
-export async function getDay(user, date){
+//returns a list of activities falling within the specified time range
+export async function getDays(user, dateOne, dateTwo){
     //test if date is valid
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(dateOne) || !/^\d{4}-\d{2}-\d{2}$/.test(dateTwo)){
         return null;
     }
+
+    //need to create a list of dates between (inclusive) the first and second.
+    const range = getDateRange(dateOne, dateTwo);
+    const activities = []
 
     try{
         const usersRef = collection(db, "users");
@@ -18,7 +23,14 @@ export async function getDay(user, date){
                 const obj = doc.data()
                 
                 if(obj?.email === user){
-                    return obj.days[date];
+                    console.log(obj.days);
+                    range.forEach(date => {
+                        if(obj.days[date]){
+                            activities.push(...obj.days[date]);
+                        }
+                    })
+
+                    return activities;
                 }
             }
 

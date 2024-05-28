@@ -11,7 +11,7 @@ import Activity from "./components/Activity";
 import AddActivityBtn from "./components/AddActivityBtn";
 
 import { auth } from "@/firebase/app";
-import { getDay } from "../firebase/firestore/crud"
+import { getDays } from "../firebase/firestore/crud"
 import { onUserChange } from "../firebase/auth/info"
 
 import styles from "./page.module.css";
@@ -30,7 +30,10 @@ export default function Home() {
     onUserChange((e : UserInterface) => {
       setUser(e);
 
-      getDay(e?.email, slice[0]).then(data => {
+      getDays(e?.email, slice[0], slice[1]).then(data => {
+        if(!data){
+          return;
+        }
         //add date to activities
         setActivities(data.map((e : any) => ({...e, date: slice[0]})));
       }).catch((error) => {
@@ -40,13 +43,16 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    getDay(user?.email, slice[0]).then(data => {
+    getDays(user?.email, slice[0], slice[1]).then(data => {
+      if(!data){
+        return;
+      }
       //add date to activities
       setActivities(data.map((e : any) => ({...e, date: slice[0]})));
     }).catch((error) => {
       console.log(error);
     })
-  }, [createPopup])
+  }, [createPopup, slice])
 
   const setPopup = (newVal: boolean) => {
     setCreatePopup(newVal);
@@ -70,6 +76,19 @@ export default function Home() {
         <Header />
         {user ? 
         <div className={styles['home-main-user']}>
+          <div className={styles['home-main-slice-picker']}>
+          <input 
+                type="date" 
+                name="type"
+                value={slice[0]} 
+                onChange={(e) => setSlice([e.target.value, slice[1]])} 
+            /> -
+            <input 
+                type="date" 
+                value={slice[1]} 
+                onChange={(e) => setSlice([slice[0], e.target.value])} 
+            />
+          </div>
           {renderActivities()}
           <AddActivityBtn popup={createPopup} setPopup={setPopup}/>
         </div>
